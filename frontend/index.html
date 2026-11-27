@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pinjam Alat</title>
+    <link href="./dist/output.css" rel="stylesheet" />
+  </head>
+
+  <body class="bg-slate-50 text-slate-800">
+    <div class="flex min-h-screen">
+      <nav class="w-56 bg-slate-900 text-slate-100 p-4 shrink-0">
+        <h2
+          class="font-bold text-white text-center border-b border-slate-700 pb-3 mb-4"
+        >
+          Pinjam Alat
+        </h2>
+
+        <button
+          class="nav-item w-full text-left bg-indigo-600 text-white py-2 px-3 mb-2 rounded text-sm"
+          data-section="dataKategori"
+        >
+          Data Kategori
+        </button>
+        <button
+          class="nav-item w-full text-left text-slate-300 hover:bg-slate-800 py-2 px-3 mb-2 rounded text-sm"
+          data-section="dataAlat"
+        >
+          Data Alat
+        </button>
+        <button
+          class="nav-item w-full text-left text-slate-300 hover:bg-slate-800 py-2 px-3 mb-2 rounded text-sm"
+          data-section="tambahAlat"
+        >
+          Tambah Alat
+        </button>
+        <button
+          class="nav-item w-full text-left text-slate-300 hover:bg-slate-800 py-2 px-3 mb-2 rounded text-sm"
+          data-section="peminjaman"
+        >
+          Peminjaman
+        </button>
+        <button
+          class="nav-item w-full text-left text-slate-300 hover:bg-slate-800 py-2 px-3 mb-2 rounded text-sm"
+          data-section="tambahPeminjaman"
+        >
+          Tambah Peminjaman
+        </button>
+      </nav>
+
+      <main class="flex-1 p-6">
+        <section id="dataKategori" class="section-page">
+          <h1 class="text-xl font-bold mb-4">Data Kategori</h1>
+
+          <table
+            class="w-full bg-white rounded-lg border border-slate-200 text-left text-sm"
+          >
+            <thead class="bg-slate-800 text-white">
+              <tr>
+                <th class="p-3">No</th>
+                <th class="p-3">Nama Kategori</th>
+                <th class="p-3">Deskripsi</th>
+                <th class="p-3">Aksi</th>
+              </tr>
+            </thead>
+
+            <tbody id="tabelKategori" class="divide-y divide-slate-200">
+              <tr>
+                <td colspan="4" class="p-4 text-center text-slate-500">
+                  Memuat data kategori...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="dataAlat" class="section-page hidden">
+          <h1 class="text-xl font-bold mb-4">Data Alat</h1>
+
+          <table
+            class="w-full bg-white rounded-lg border border-slate-200 text-left text-sm"
+          >
+            <thead class="bg-slate-800 text-white">
+              <tr>
+                <th class="p-3">No</th>
+                <th class="p-3">Nama Alat</th>
+                <th class="p-3">Kategori</th>
+                <th class="p-3">Kondisi</th>
+                <th class="p-3">Stok</th>
+                <th class="p-3">Lokasi</th>
+                <th class="p-3">Edit</th>
+              </tr>
+            </thead>
+            <tbody id="tabelAlat" class="divide-y divide-slate-200">
+              <tr>
+                <td colspan="7" class="p-4 text-center text-slate-500">
+                  Memuat data alat...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="tambahAlat" class="section-page hidden">
+          <h1 class="text-xl font-bold mb-4">Tambah Alat</h1>
+
+          <form
+            id="formAlat"
+            class="bg-white p-5 rounded-lg border border-slate-200 max-w-md space-y-3 text-sm"
+          >
+            <div>
+              <label class="block font-medium mb-1">Nama Alat</label>
+              <input
+                type="text"
+                id="namaAlat"
+                required
+                class="w-full border rounded px-3 py-2"
+              />
+            </div>
+            <div>
+              <label class="block font-medium mb-1">Kategori</label>
+              <select
+                id="kategoriAlat"
+                required
+                class="w-full border rounded px-3 py-2"
+              >
+                <option value="" disabled selected>Memuat Kategori...</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-medium mb-1">Kondisi</label>
+              <select id="kondisiAlat" class="w-full border rounded px-3 py-2">
+                <option value="Baik">Baik</option>
+                <option value="Rusak Ringan">Rusak Ringan</option>
+                <option value="Rusak Berat">Rusak Berat</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-medium mb-1">Stok</label>
+              <input
+                type="number"
+                id="stokAlat"
+                min="0"
+                value="1"
+                required
+                class="w-full border rounded px-3 py-2"
+              />
+            </div>
+            <div>
+              <label class="block font-medium mb-1">Lokasi</label>
+              <input
+                type="text"
+                id="lokasiAlat"
+                class="w-full border rounded px-3 py-2"
+              />
+            </div>
+            <div class="flex gap-2">
+              <button
+                type="submit"
+                class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700"
+              >
+                Tambah Alat
+              </button>
+            </div>
+            <div id="message-area"></div>
+          </form>
+        </section>
+
+        <section id="peminjaman" class="section-page hidden">
+          <h1 class="text-xl font-bold mb-4">Daftar Peminjaman</h1>
+
+          <table
+            class="w-full bg-white rounded-lg border border-slate-200 text-left text-sm"
+          >
+            <thead class="bg-slate-800 text-white">
+              <tr>
+                <th class="p-3">No</th>
+                <th class="p-3">Nama Peminjam</th>
+                <th class="p-3">Kelas</th>
+                <th class="p-3">Alat</th>
+                <th class="p-3">Jumlah</th>
+                <th class="p-3">Tgl Pinjam</th>
+                <th class="p-3">Tgl Kembali</th>
+                <th class="p-3">Status</th>
+                <th class="p-3">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="tabelPeminjaman" class="divide-y divide-slate-200">
+              <tr>
+                <td colspan="9" class="p-4 text-center text-slate-500">
+                  Memuat data peminjaman...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="tambahPeminjaman" class="section-page hidden">
+          <h1 class="text-xl font-bold mb-4">Tambah Peminjaman</h1>
+
+          <form
+            id="formPeminjaman"
+            class="bg-white p-5 rounded-lg border border-slate-200 max-w-md space-y-3 text-sm"
+          >
+            <div>
+              <label class="block font-medium mb-1">Pilih Alat</label>
+              <select
+                id="alatPinjam"
+                required
+                class="w-full border rounded px-3 py-2"
+              >
+                <option value="" disabled selected>Memuat Alat...</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-medium mb-1">Nama Peminjam</label>
+              <input
+                type="text"
+                id="namaPeminjam"
+                required
+                class="w-full border rounded px-3 py-2"
+              />
+            </div>
+            <div>
+              <label class="block font-medium mb-1">Kelas</label>
+              <input
+                type="text"
+                id="kelasPeminjam"
+                required
+                class="w-full border rounded px-3 py-2"
+              />
+            </div>
+            <div>
+              <label class="block font-medium mb-1">Jumlah</label>
+              <input
+                type="number"
+                id="jumlahPinjam"
+                min="1"
+                value="1"
+                required
+                class="w-full border rounded px-3 py-2"
+              />
+            </div>
+            <div>
+              <label class="block font-medium mb-1">Tanggal Pinjam</label>
+              <input
+                type="date"
+                id="tanggalPinjam"
+                required
+                class="w-full border rounded px-3 py-2"
+              />
+            </div>
+            <div>
+              <label class="block font-medium mb-1"
+                >Tanggal Kembali (Opsional)</label
+              >
+              <input
+                type="date"
+                id="tanggalKembali"
+                class="w-full border rounded px-3 py-2"
+              />
+            </div>
+            <button
+              type="submit"
+              class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700"
+            >
+              Catat Peminjaman
+            </button>
+          </form>
+        </section>
+
+        <section id="editKategori" class="section-page hidden">
+          <h1 class="text-xl font-bold mb-4">Edit Kategori</h1>
+
+          <form
+            id="formEditKategori"
+            class="bg-white p-5 rounded-lg border border-slate-200 max-w-md space-y-3 text-sm"
+          >
+            <input type="hidden" id="editIdKategori" />
+            <div>
+              <label class="block font-medium mb-1">Nama Kategori</label>
+              <input
+                id="editNamaKategori"
+                type="text"
+                required
+                class="w-full border rounded px-3 py-2"
+              />
+            </div>
+            <div>
+              <label class="block font-medium mb-1">Deskripsi</label>
+              <textarea
+                id="editDeskripsiKategori"
+                rows="3"
+                class="w-full border rounded px-3 py-2"
+              ></textarea>
+            </div>
+            <div class="flex gap-2">
+              <button
+                type="submit"
+                class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700"
+              >
+                Simpan Perubahan
+              </button>
+              <button
+                type="button"
+                onclick="showSection('dataKategori')"
+                class="bg-slate-200 text-slate-700 px-4 py-2 rounded hover:bg-slate-300"
+              >
+                Batal
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <section id="editAlat" class="section-page hidden">
+          <h1 class="text-xl font-bold mb-4">Edit Alat</h1>
+
+          <form
+            id="formEditAlat"
+            class="bg-white p-5 rounded-lg border border-slate-200 max-w-md space-y-3 text-sm"
+          >
+            <input type="hidden" id="editIdAlat" />
+            <div>
+              <label class="block font-medium mb-1">Nama Alat</label>
+              <input
+                id="editNamaAlat"
+                type="text"
+                required
+                class="w-full border rounded px-3 py-2"
+              />
+            </div>
+            <div>
+              <label class="block font-medium mb-1">Kategori</label>
+              <select
+                id="editKategoriAlat"
+                required
+                class="w-full border rounded px-3 py-2"
+              >
+                <option value="" disabled selected>Memuat Kategori...</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-medium mb-1">Kondisi</label>
+              <select id="editKondisiAlat" class="w-full border rounded px-3 py-2">
+                <option value="Baik">Baik</option>
+                <option value="Rusak Ringan">Rusak Ringan</option>
+                <option value="Rusak Berat">Rusak Berat</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-medium mb-1">Stok</label>
+              <input
+                type="number"
+                id="editStokAlat"
+                min="0"
+                required
+                class="w-full border rounded px-3 py-2"
+              />
+            </div>
+            <div>
+              <label class="block font-medium mb-1">Lokasi</label>
+              <input
+                type="text"
+                id="editLokasiAlat"
+                class="w-full border rounded px-3 py-2"
+              />
+            </div>
+            <div class="flex gap-2">
+              <button
+                type="submit"
+                class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700"
+              >
+                Simpan Perubahan
+              </button>
+              <button
+                type="button"
+                onclick="showSection('dataAlat')"
+                class="bg-slate-200 text-slate-700 px-4 py-2 rounded hover:bg-slate-300"
+              >
+                Batal
+              </button>
+            </div>
+          </form>
+        </section>
+        
+      </main>
+    </div>
+
+    <script src="./js/app.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
